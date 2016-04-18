@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlmap xmlns="http://www.epril.com/sqlmap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.epril.com/sqlmap http://www.epril.com/sqlmap/sqlmap.xsd">
+	<sql key="customerGet">select * from customers where id = ?</sql>
+	<sql key="customerGetAll">select * from customers order by created desc</sql>
+	<sql key="customerDelete">delete from customers where id=?</sql>
+	<sql key="customerDeleteAll">delete from customers</sql>
+	<sql key="customerGetCount">select count(*) from customers</sql>
+	<sql key="customerUpdate">update customers set name=:name, phone=:phone, ref=:ref, modified=:modified where id=:id</sql>
+
+	<sql key="adminGet">select * from admin where id = ?</sql>
+	<sql key="adminGetAll">select * from admin</sql>
+	<sql key="adminDelete">delete from admin where id=?</sql>
+	<sql key="adminDeleteAll">delete from admin</sql>
+	<sql key="adminGetCount">select count(*) from admin</sql>
+	<sql key="adminUpdate">update admin set password=:password, name=:name, phone=:phone, email=:email where id=:id</sql>
+	
+	
+	<sql key="deviceGet">select * from devices where id = ?</sql>
+	<sql key="deviceGetAll">select * from devices order by id</sql>
+	<sql key="deviceGetAllForMobile">select * from devices where customerid = ?</sql>
+	<sql key="deviceDelete">delete from devices where id=?</sql>
+	<sql key="deviceDeleteAll">delete from devices</sql>
+	<sql key="deviceGetCount">select count(*) from devices</sql>
+	<sql key="deviceUpdate">update devices set pushid = :pushid, customerid = :customerid, status = :status, modified=:modified where id = :id</sql>
+	
+	<sql key="logGet">select * from logs where id = ?</sql>
+	<sql key="logGetAll">select * from logs order by id</sql>
+	<sql key="logDelete">delete from logs where id=?</sql>
+	<sql key="logDeleteAll">delete from logs</sql>
+	<sql key="logGetCount">select count(*) from logs</sql>
+	<sql key="logUpdate">update logs set customerid = :customerid, deviceid = :deviceid, status = :status, ref = :ref, operated=:operated where id = :id</sql>
+	
+</sqlmap>

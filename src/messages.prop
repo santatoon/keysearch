@@ -1,0 +1,4 @@
+invalidLogin=사용자 아이디 또는 비밀번호가 바르지 않습니다.
+duplicateId=이미 사용중인 아이디입니다.
+duplicateName=이미 사용중인 이름입니다.
+Size={2}글자 이상 {4}글자 이하여야 합니다.

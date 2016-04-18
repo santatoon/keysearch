@@ -1,0 +1,8 @@
+create table logs (id int auto_increment primary key not null, customerid int, deviceid int, status boolean, ref text, operated Date) character set utf8 collate utf8_general_ci;
+
+create table customers(id int auto_increment primary key not null, name varchar(20) not null, phone varchar(20), ref text, created Date, modified Date) character set utf8 collate utf8_general_ci;
+
+create table devices (id int auto_increment primary key not null, pushid varchar(500), customerid int, status boolean not null default false,  created Date, modified Date, FOREIGN KEY (customerid) REFERENCES customers(id)) character set utf8 collate utf8_general_ci;
+
+
+create table admin (id varchar(20) primary key not null, password varchar(20) not null, name varchar(20) not null, phone varchar(20), email varchar(40)) character set utf8 collate utf8_general_ci;

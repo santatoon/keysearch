@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:component-scan base-package="santatoon.wand.web" />
+	<tx:annotation-driven />
+	
+	
+	<mvc:annotation-driven conversion-service="conversionService" />
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/customers/**" />
+			<mvc:mapping path="/devices/**" />
+			<mvc:mapping path="/admin/**" />
+			<bean class="santatoon.wand.web.security.LoginSecurityInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	
+
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<bean class="santatoon.wand.web.converter.DateConverter$StringToDate" />
+				<bean class="santatoon.wand.web.converter.DateConverter$DateToString" />
+				<bean
+					class="santatoon.wand.web.converter.StatusConverter$StringToStatus" />
+				<bean
+					class="santatoon.wand.web.converter.StatusConverter$StatusToString" />
+			</set>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>10000000</value>
+		</property>
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="xmlView" name="xmlView"
+		class="org.springframework.web.servlet.view.xml.MarshallingView">
+		<property name="marshaller" ref="xmlMarshaller" />
+		<property name="contentType" value="application/xml;charset=UTF-8" />
+		<property name="modelKey" value="xmlData" />
+	</bean>
+
+	<bean id="xmlMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<property name="autodetectAnnotations" value="true" />
+	</bean>
+
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+</beans>
