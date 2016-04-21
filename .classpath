@@ -5,6 +5,7 @@
 	<classpathentry kind="lib" path="lib/mockito-core-1.7.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.test-3.0.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/objenesis-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/json-simple-1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Piljoo/Desktop/eclipse/apache-tomcat-7.0.64/lib/servlet-api.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
