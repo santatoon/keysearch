@@ -4,7 +4,11 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <title>Keysearch - Cosmetics</title>
@@ -77,21 +81,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="banner-info animated wow slideInUp" data-wow-delay="800ms">
 				<h3>Keysearch</h3>
 				<p>Find Your Perfect Beauty Products Via SNS</p>
-				<form>
-					<input type="text" value="Search Here..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search Here...';}" required="">
-					<div class="clearfix"> </div>
-				</form>
-				
-				<div class="more">
-					<a href="single.html" class="type-4">
-						<span> Search </span>
-						<span> Search </span>
-						<span> Search </span>
-						<span> Search </span>	
-						<span> Search </span>
-						<span> Search </span>
-					</a>
-				</div>
+				<form:form modelAttribute="search">
+					<form:input path="query" type="text" value="Search Here..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search Here...';}" required=""/>
+					<div class="clearfix"> </div>	
+					<div class="more">
+						<input type="submit" value="Search"/> 
+					</div>
+				</form:form>
 				<div class="social-icons">
 					<ul>
 						<li class="twitter"></li>

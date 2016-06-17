@@ -20,9 +20,8 @@
 	<mvc:resources mapping="/fonts/**" location="/fonts/" />
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/customers/**" />
-			<mvc:mapping path="/devices/**" />
-			<mvc:mapping path="/admin/**" />
+			<mvc:mapping path="/mypage/**" />
+			<mvc:mapping path="/myscrapbook/**" />
 			<bean class="santatoon.wand.web.security.LoginSecurityInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -36,9 +35,13 @@
 				<bean class="santatoon.wand.web.converter.DateConverter$StringToDate" />
 				<bean class="santatoon.wand.web.converter.DateConverter$DateToString" />
 				<bean
-					class="santatoon.wand.web.converter.StatusConverter$StringToStatus" />
+					class="santatoon.wand.web.converter.TroubletypeConverter$StringToTroubletype" />
 				<bean
-					class="santatoon.wand.web.converter.StatusConverter$StatusToString" />
+					class="santatoon.wand.web.converter.TroubletypeConverter$TroubletypeToString" />
+				<bean
+					class="santatoon.wand.web.converter.SkintypeConverter$StringToSkintype" />
+				<bean
+					class="santatoon.wand.web.converter.SkintypeConverter$SkintypeToString" />
 			</set>
 		</property>
 	</bean>

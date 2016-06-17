@@ -2,22 +2,18 @@ package santatoon.wand.web.security;
 
 import java.util.Date;
 
-
-
-
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import santatoon.wand.domain.Admin;
+import santatoon.wand.domain.Customer;
 
 @Component
 @Scope("session")
 public class LoginInfoSession implements LoginInfo {
-	private Admin currentUser;
+	private Customer currentUser;
 	private Date loginTime;
 	
-	public Admin currentUser() {
+	public Customer currentUser() {
 		return this.currentUser;
 	}
 
@@ -31,7 +27,7 @@ public class LoginInfoSession implements LoginInfo {
 		this.loginTime = null;
 	}
 
-	public void save(Admin user) {
+	public void save(Customer user) {
 		this.currentUser = user;
 		this.loginTime = new Date();
 	}

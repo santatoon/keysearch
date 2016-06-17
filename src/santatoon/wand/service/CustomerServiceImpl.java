@@ -40,9 +40,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer get(int id) {
+	public Customer get(String email) {
 		// TODO Auto-generated method stub
-		return this.customerDao.get(id);
+		return this.customerDao.get(email);
 	}
 
 	@Override

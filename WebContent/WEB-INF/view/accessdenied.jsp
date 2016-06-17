@@ -18,7 +18,7 @@
 	<hr />	
 	<div class="span-12 append-12 last">
 		<div class="notice">
-			먼저 <a href="login">로그인</a> 해주세요.
+			먼저 <a href="signin">로그인</a> 해주세요.
 		</div>
 	</div>
 </div>

@@ -17,21 +17,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
 
 import santatoon.wand.domain.Customer;
+import santatoon.wand.domain.Skintype;
+import santatoon.wand.domain.Troubletype;
 import santatoon.wand.service.CustomerService;
 import santatoon.wand.web.security.LoginInfo;
 import santatoon.wand.web.validator.AdminRegisterValidator;
 
 @Controller
 @Transactional
-@RequestMapping("/customers/edit/{id}")
+@RequestMapping("/mypage")
 @SessionAttributes("customer")
 public class CustomerEditController {
 	private CustomerService customerService;
@@ -48,11 +48,28 @@ public class CustomerEditController {
 	public void initBinder(WebDataBinder binder) {
 		binder.setDisallowedFields("id", "logins");
 	}
+	
+	@ModelAttribute("currentUser")
+	public Customer currentUser() {
+		return loginInfoProvider.get().currentUser();
+	}
+	
+	@ModelAttribute
+	public List<Skintype> skintypes() {
+		Skintype[] skintype = Skintype.values();
+		return Arrays.asList(skintype);
+	}
+	
+	@ModelAttribute
+	public List<Troubletype> troubletypes() {
+		Troubletype[] troubletype = Troubletype.values();
+		return Arrays.asList(troubletype);
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String showform(@PathVariable int id, ModelMap model) {
-		model.addAttribute(this.customerService.get(id));
-		return "customers/edit";
+	public String showform(ModelMap model) {
+		model.addAttribute("customer", this.customerService.get(this.loginInfoProvider.get().currentUser().getEmail()));
+		return "mypage";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -60,13 +77,13 @@ public class CustomerEditController {
 			HttpServletRequest request) throws Exception {
 		// this.registerValidator.validate(customer, result);
 		if (result.hasErrors()) {
-			return "customers/edit";
+			return "mypage";
 		} else {
 			Date now = new Date(new java.util.Date().getTime());
 			customer.setModified(now);
 			this.customerService.update(customer);
 			status.setComplete();
-			return "redirect:../list";
+			return "redirect:mypage";
 		}
 	}
 }

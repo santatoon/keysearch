@@ -12,9 +12,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import santatoon.wand.domain.Customer;
 import santatoon.wand.domain.Login;
 import santatoon.wand.web.security.LoginInfo;
 import santatoon.wand.web.validator.LoginValidator;
@@ -22,7 +24,7 @@ import santatoon.wand.web.validator.LoginValidator;
 
 @Controller
 @Transactional
-@RequestMapping("/login")
+@RequestMapping("/signin")
 @SessionAttributes("login") 
 public class LoginController {
 	private LoginValidator loginValidator;
@@ -41,20 +43,22 @@ public class LoginController {
 	@RequestMapping(method=RequestMethod.GET)
 	public String showform(ModelMap model) {
 		model.addAttribute(new Login());
-		return "login";
+		model.addAttribute(new Customer());
+		return "signin";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String login(@ModelAttribute @Valid Login login, BindingResult result, SessionStatus status) {
-		if (result.hasErrors()) return "login";
+	public String login(@ModelAttribute @Valid Login login, BindingResult resultLogin,@ModelAttribute @Valid Customer customer, BindingResult resultCustomer, SessionStatus status) {
+		if (resultLogin.hasErrors()) return "login";
 		
-		this.loginValidator.validate(login, result);
-		if (result.hasErrors()) {
-			return "login";
+		this.loginValidator.validate(login, resultLogin);
+		if (resultLogin.hasErrors()) {
+			
+			return "signin";
 		}
 		else {
 			status.setComplete();
-			return "redirect:customers/list";
+			return "redirect:mypage";
 		}
 	}
 }

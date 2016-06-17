@@ -1,8 +1,14 @@
-create table logs (id int auto_increment primary key not null, customerid int, deviceid int, status boolean, ref text, operated Date) character set utf8 collate utf8_general_ci;
 
-create table customers(id int auto_increment primary key not null, name varchar(20) not null, phone varchar(20), ref text, created Date, modified Date) character set utf8 collate utf8_general_ci;
-
-create table devices (id int auto_increment primary key not null, pushid varchar(500), customerid int, status boolean not null default false,  created Date, modified Date, FOREIGN KEY (customerid) REFERENCES customers(id)) character set utf8 collate utf8_general_ci;
+create table customers(id int auto_increment primary key not null, email text not null, password varchar(20), firstname varchar(50), lastname varchar(50), skintype int, troubletype int, created Date, modified Date) character set utf8 collate utf8_general_ci;
 
 
-create table admin (id varchar(20) primary key not null, password varchar(20) not null, name varchar(20) not null, phone varchar(20), email varchar(40)) character set utf8 collate utf8_general_ci;
+create table scrapbooks(id int auto_increment primary key not null, customerid int not null, link text, tags text, caption text, imageurl text, created Date, modified Date) character set utf8mb4 collate utf8mb4_unicode_ci;
+
+create table categories(id int auto_increment primary key not null, name text, created Date, modified Date) character set utf8mb4 collate utf8mb4_unicode_ci;
+
+
+create table manufacturers(id int auto_increment primary key not null, name text, created Date, modified Date) character set utf8mb4 collate utf8mb4_unicode_ci;
+
+create table products(id int auto_increment primary key not null, categoryid int, manufacturerid int, name text, created Date, modified Date) character set utf8mb4 collate utf8mb4_unicode_ci;
+
+create table reviewscores(id int auto_increment primary key not null, word text, score int, created Date, modified Date) character set utf8mb4 collate utf8mb4_unicode_ci;

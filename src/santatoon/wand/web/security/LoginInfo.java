@@ -2,12 +2,12 @@ package santatoon.wand.web.security;
 
 import java.util.Date;
 
-import santatoon.wand.domain.Admin;
+import santatoon.wand.domain.Customer;
 
 public interface LoginInfo {
-	void save(Admin user);
+	void save(Customer user);
 	void remove();
 	boolean isLoggedIn();
-	Admin currentUser();
+	Customer currentUser();
 	Date getLoginTime();
 }

@@ -9,20 +9,22 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import santatoon.wand.domain.Admin;
+import santatoon.wand.domain.Customer;
 import santatoon.wand.domain.Login;
 import santatoon.wand.service.AdminService;
+import santatoon.wand.service.CustomerService;
 import santatoon.wand.web.security.LoginInfo;
 
 @Component
 public class LoginValidator implements Validator{
-	private AdminService adminService;
+	private CustomerService customerService;
 	
 	@Inject
 	private Provider<LoginInfo> loginInfoProvider;
 
 	@Autowired
-	public void setUserService(AdminService adminService) {
-		this.adminService = adminService;
+	public void setUserService(CustomerService customerService) {
+		this.customerService = customerService;
 	}
 	
 	public boolean supports(Class<?> clazz) {
@@ -31,13 +33,13 @@ public class LoginValidator implements Validator{
 	
 	public void validate(Object target, Errors errors) {
 		Login login = (Login)target;
-		Admin admin = adminService.get(login.getId());
-		if (admin == null || !admin.getPassword().equals(login.getPassword())) {
+		Customer customer = customerService.get(login.getEmail());
+		if (customer == null || !customer.getPassword().equals(login.getPassword())) {
 			errors.reject("invalidLogin", "Invalid Login");
 		}
 		else {
 			LoginInfo loginInfo = loginInfoProvider.get();
-			loginInfo.save(admin);
+			loginInfo.save(customer);
 		}
 	}
 }

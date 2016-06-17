@@ -10,7 +10,7 @@ public interface GenericService<T> {
 
 	void delete(int id);
 
-	T get(int id);
+	T get(String id);
 	
 	List<T> getAll();
 }

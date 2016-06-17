@@ -8,17 +8,26 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Customer {
-	
+	@NotNull
 	int id;
 
+	@NotNull
+	String email;
+	
+	@NotNull
+	String password;
 
 	@NotNull
-	@Size(min = 2, max = 4)
-	String name;
+	String firstname;
+	
+	@NotNull
+	String lastname;
 
-	String phone;
+	@NotNull
+	Skintype skintype;
 
-	String ref;
+	@NotNull
+	Troubletype troubletype;
 
 	@DateTimeFormat(style = "M-")
 	Date created;
@@ -29,62 +38,124 @@ public class Customer {
 
 	public Customer() {
 	}
-
-	public Customer(String name, String phone, String ref) {
+	public Customer(int id, String email, String password, String firstname, String lastname, Skintype skintype, Troubletype troubletype,
+			Date created, Date modified) {
 		super();
-		this.name = name;
-		this.phone = phone;
-		this.ref = ref;
-
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.skintype = skintype;
+		this.troubletype = troubletype;
+		this.created = created;
+		this.modified = modified;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
+
+
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
 
-	public String getName() {
-		return name;
+
+	public String getEmail() {
+		return email;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getRef() {
-		return ref;
+
+
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setRef(String ref) {
-		this.ref = ref;
+
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
+
+
+
+	public Skintype getSkintype() {
+		return skintype;
+	}
+
+
+
+	public void setSkintype(Skintype skintype) {
+		this.skintype = skintype;
+	}
+
+
+
+	public Troubletype getTroubletype() {
+		return troubletype;
+	}
+
+
+
+	public void setTroubletype(Troubletype troubletype) {
+		this.troubletype = troubletype;
+	}
+
+
 
 	public Date getCreated() {
 		return created;
 	}
 
+
+
 	public void setCreated(Date created) {
 		this.created = created;
 	}
+
+
+
 	public Date getModified() {
 		return modified;
 	}
 
+
+
 	public void setModified(Date modified) {
 		this.modified = modified;
 	}
+
+
+
+	
+
+	
 
 	public void initDates() {
 		Date now = new Date(new java.util.Date().getTime());

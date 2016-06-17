@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sqlmap xmlns="http://www.epril.com/sqlmap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.epril.com/sqlmap http://www.epril.com/sqlmap/sqlmap.xsd">
-	<sql key="customerGet">select * from customers where id = ?</sql>
+	<sql key="customerGet">select * from customers where email = ?</sql>
 	<sql key="customerGetAll">select * from customers order by created desc</sql>
 	<sql key="customerDelete">delete from customers where id=?</sql>
 	<sql key="customerDeleteAll">delete from customers</sql>
 	<sql key="customerGetCount">select count(*) from customers</sql>
-	<sql key="customerUpdate">update customers set name=:name, phone=:phone, ref=:ref, modified=:modified where id=:id</sql>
+	<sql key="customerUpdate">update customers set password=:password, firstname=:firstname, lastname=:lastname, skintype=:skintype, troubletype=:troubletype, modified=:modified where id=:id</sql>
+	
+	
+	<sql key="scrapbookGet">select * from scrapbooks where id = ?</sql>
+	<sql key="scrapbookGetAll">select * from scrapbooks where customerid=? order by created desc</sql>
+	<sql key="scrapbookDelete">delete from scrapbooks where id=?</sql>
+	<sql key="scrapbookDeleteAll">delete from scrapbooks</sql>
+	<sql key="scrapbookGetCount">select count(*) from scrapbooks</sql>
+	<sql key="scrapbookUpdate">update scrapbooks set customerid=:customerid, link=:link, tags=:tags, caption=:caption, imageurl=:imageurl, modified=:modified where id=:id</sql>
+	
+	
+	<sql key="categoryGet">select * from categories where name = ?</sql>
+	<sql key="categoryGetAll">select * from categories order by created desc</sql>
+	<sql key="categoryDelete">delete from categories where id=?</sql>
+	<sql key="categoryDeleteAll">delete from categories</sql>
+	<sql key="categoryGetCount">select count(*) from categories</sql>
+	<sql key="categoryUpdate">update categories set name=:name, modified=:modified where id=:id</sql>
+	
+	
+	<sql key="manufacturerGet">select * from manufacturers where name = ?</sql>
+	<sql key="manufacturerGetAll">select * from manufacturers order by created desc</sql>
+	<sql key="manufacturerDelete">delete from manufacturers where id=?</sql>
+	<sql key="manufacturerDeleteAll">delete from manufacturers</sql>
+	<sql key="manufacturerGetCount">select count(*) from manufacturers</sql>
+	<sql key="manufacturerUpdate">update manufacturers set name=:name, modified=:modified where id=:id</sql>
+	
+	
+	<sql key="productGet">select * from products where name = ?</sql>
+	<sql key="productGetAll">select * from products order by created desc</sql>
+	<sql key="productDelete">delete from products where id=?</sql>
+	<sql key="productDeleteAll">delete from products</sql>
+	<sql key="productGetCount">select count(*) from products</sql>
+	<sql key="productUpdate">update products set categoryid=:categoryid, manufacturerid=:manufacturerid, name=:name, modified=:modified where id=:id</sql>
 
-	<sql key="adminGet">select * from admin where id = ?</sql>
-	<sql key="adminGetAll">select * from admin</sql>
-	<sql key="adminDelete">delete from admin where id=?</sql>
-	<sql key="adminDeleteAll">delete from admin</sql>
-	<sql key="adminGetCount">select count(*) from admin</sql>
-	<sql key="adminUpdate">update admin set password=:password, name=:name, phone=:phone, email=:email where id=:id</sql>
-	
-	
-	<sql key="deviceGet">select * from devices where id = ?</sql>
-	<sql key="deviceGetAll">select * from devices order by id</sql>
-	<sql key="deviceGetAllForMobile">select * from devices where customerid = ?</sql>
-	<sql key="deviceDelete">delete from devices where id=?</sql>
-	<sql key="deviceDeleteAll">delete from devices</sql>
-	<sql key="deviceGetCount">select count(*) from devices</sql>
-	<sql key="deviceUpdate">update devices set pushid = :pushid, customerid = :customerid, status = :status, modified=:modified where id = :id</sql>
-	
-	<sql key="logGet">select * from logs where id = ?</sql>
-	<sql key="logGetAll">select * from logs order by id</sql>
-	<sql key="logDelete">delete from logs where id=?</sql>
-	<sql key="logDeleteAll">delete from logs</sql>
-	<sql key="logGetCount">select count(*) from logs</sql>
-	<sql key="logUpdate">update logs set customerid = :customerid, deviceid = :deviceid, status = :status, ref = :ref, operated=:operated where id = :id</sql>
-	
+
+	<sql key="reviewscoreGet">select * from reviewscores where word = ?</sql>
+	<sql key="reviewscoreGetAll">select * from reviewscores order by created desc</sql>
+	<sql key="reviewscoreDelete">delete from reviewscores where id=?</sql>
+	<sql key="reviewscoreDeleteAll">delete from reviewscores</sql>
+	<sql key="reviewscoreGetCount">select count(*) from reviewscores</sql>
+	<sql key="reviewscoreUpdate">update reviewscores set word=:word, score=:score, modified=:modified where id=:id</sql>
 </sqlmap>

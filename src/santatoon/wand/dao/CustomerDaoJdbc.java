@@ -17,6 +17,8 @@ import org.springframework.stereotype.Repository;
 import santatoon.sqlservice.SqlService;
 import santatoon.support.MappedBeanPropertySqlParameterSource;
 import santatoon.wand.domain.Customer;
+import santatoon.wand.domain.Skintype;
+import santatoon.wand.domain.Troubletype;
 
 @Repository
 public class CustomerDaoJdbc implements CustomerDao {
@@ -26,15 +28,17 @@ public class CustomerDaoJdbc implements CustomerDao {
 		public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Customer customer = new Customer();
 			customer.setId(rs.getInt("id"));
-			customer.setName(rs.getString("name"));
-			customer.setPhone(rs.getString("phone"));
-			customer.setRef(rs.getString("ref"));
+			customer.setEmail(rs.getString("email"));
+			customer.setPassword(rs.getString("password"));
+			customer.setFirstname(rs.getString("firstname"));
+			customer.setLastname(rs.getString("lastname"));
+			customer.setSkintype(Skintype.valueOf(rs.getInt("skintype")));
+			customer.setTroubletype(Troubletype.valueOf(rs.getInt("troubletype")));
 			customer.setCreated(rs.getDate("created"));
 			customer.setModified(rs.getDate("modified"));
 			return customer;
 		}
 	};
-	
 
 	private Map<String, String> sqlMap;
 
@@ -52,23 +56,21 @@ public class CustomerDaoJdbc implements CustomerDao {
 	@Autowired
 	public void init(DataSource dataSource) {
 		this.jdbcTemplate = new SimpleJdbcTemplate(dataSource);
-		this.userInsert = new SimpleJdbcInsert(dataSource)
-				.withTableName("customers").usingGeneratedKeyColumns("id");;
+		this.userInsert = new SimpleJdbcInsert(dataSource).withTableName("customers").usingGeneratedKeyColumns("id");
+		;
 	}
 
 	public int add(final Customer customer) {
-		
-		
-		int generatedId = this.userInsert.executeAndReturnKey(new MappedBeanPropertySqlParameterSource(
-				customer)).intValue();
+
+		int generatedId = this.userInsert.executeAndReturnKey(new MappedBeanPropertySqlParameterSource(customer))
+				.intValue();
 
 		return generatedId;
 	}
 
-	public Customer get(int id) {
+	public Customer get(String email) {
 		try {
-			return this.jdbcTemplate.queryForObject(
-					this.sqlService.getSql("customerGet"), this.userMapper, id);
+			return this.jdbcTemplate.queryForObject(this.sqlService.getSql("customerGet"), this.userMapper, email);
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
@@ -76,13 +78,12 @@ public class CustomerDaoJdbc implements CustomerDao {
 
 	public void update(Customer customer) {
 		this.jdbcTemplate.update(this.sqlService.getSql("customerUpdate"),
-				new MappedBeanPropertySqlParameterSource(customer));
+				new CustomerBeanPropertySqlParameterSource(customer));
 
 	}
 
 	public List<Customer> getAll() {
-		return this.jdbcTemplate.query(
-				this.sqlService.getSql("customerGetAll"), this.userMapper);
+		return this.jdbcTemplate.query(this.sqlService.getSql("customerGetAll"), this.userMapper);
 	}
 
 	public void deleteAll() {
@@ -95,9 +96,14 @@ public class CustomerDaoJdbc implements CustomerDao {
 
 	public int getCount() {
 
-		return this.jdbcTemplate.queryForInt(this.sqlService
-				.getSql("customerGetCount"));
+		return this.jdbcTemplate.queryForInt(this.sqlService.getSql("customerGetCount"));
 	}
 
-
+	private static class CustomerBeanPropertySqlParameterSource extends MappedBeanPropertySqlParameterSource {
+		public CustomerBeanPropertySqlParameterSource(Object object) {
+			super(object);
+			map("skintype", "skintype.value");
+			map("troubletype", "troubletype.value");
+		}
+	}
 }

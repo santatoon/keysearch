@@ -18,7 +18,7 @@ public class LoginSecurityInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 		else {
-			response.sendRedirect(request.getContextPath() + "/server/accessdenied");
+			response.sendRedirect(request.getContextPath() + "/server/signin");
 			return false;
 		}
 	}

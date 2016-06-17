@@ -3,6 +3,9 @@
 	<name>WAND-server</name>
 	<comment></comment>
 	<projects>
+		<project>KOMORAN</project>
+		<project>aho-corasick</project>
+		<project>commons</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
