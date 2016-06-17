@@ -1,0 +1,62 @@
+.form
+{
+	background: rgba(19, 35, 47, 0.9);
+	padding: 40px;
+	max-width: 600px;
+	margin: 40px auto;
+	border-radius: 4px;
+	box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+	text-align: left;
+}
+span
+{
+	font-family: 'Titillium Web', sans-serif;
+	color: #FFFFFF;
+	margin-right: 10px;
+}
+.field-wrap {
+	position: relative;
+	margin-bottom: 40px;
+}
+
+.button {
+	border: 0;
+	outline: none;
+	border-radius: 0;
+	padding: 0px 0;
+	font-size: 2rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: .1em;
+	background: #B76E79;
+	color: #ffffff;
+	-webkit-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	-webkit-appearance: none;
+}
+
+.button:hover, .button:focus {
+	background: #ab5461;
+}
+
+.button-block {
+	text-align: center;
+}
+
+label
+{
+	background-color:#c1bdba;
+	padding: 5px 12px;
+	text-align: center;
+	color:#FFFFFF;
+}
+
+.radio .rad
+{
+	display:none;
+}
+.radio .rad:checked  + label
+{
+	background-color:#ab5461;
+}
+
